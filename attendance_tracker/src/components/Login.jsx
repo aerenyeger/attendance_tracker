@@ -11,27 +11,28 @@ const Login = () => {
   async function handleSubmit(e){
     e.preventDefault();
     if(login){
-      const res=await axios.post("/api/check_login",{
+      const res=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/check_login`,{
         username:username,
         password:password
       })
       if(res.status===200){
         set_id(res.data._id)
-        navigate("/tracker",{state:{username,password,_id: res.data._id,}})
+        navigate("/tracker",{state:{username:res.data.username,password:res.data.password,_id: res.data._id,}})
         // set_id(res.data._id) and then immediately use _id in navigate, 
         // but setState in React is asynchronous, so _id may still be empty at that point.
       }
     }
     else{
-      const res=await axios.post("/api/check_signup",{
+      const res=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/check_signup`,{
         username:username,
         password:password
       })
       if(res.status===200){
+        console.log(res.data)
         navigate("/Tracker",{
           state:{
             username,
-            password,
+            password:res.data.password,
             _id: res.data._id,
           }
         })

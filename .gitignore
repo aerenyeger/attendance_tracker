@@ -1,0 +1,10 @@
+# Ignore node_modules in both frontend and backend
+attendance_tracker/node_modules/
+bd_attendance_tracker/node_modules/
+
+# Ignore .env files (credentials)
+attendance_tracker/.env
+bd_attendance_tracker/.env
+
+
+

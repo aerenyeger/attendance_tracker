@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 const connectDB=async()=>{
     try {
-        await mongoose.connect("mongodb+srv://aggarwalmohit118:YN5UZoKURG7kc8hC@cluster.axncbuk.mongodb.net/", {
+        await mongoose.connect(process.env.MONGO_DB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,})
         console.log("mongodb connected successfully")

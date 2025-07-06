@@ -10,10 +10,9 @@ const Tracker = () => {
   const[new_subj,setnew_subj]=useState("")
   const{username,password,_id}=location.state || {}
   async function fetch_attendance(){
-    const attendance=await axios.post("/api/attendance_info",{
+    const attendance=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/attendance_info`,{
       username:username,
       password:password
-      
     })
     console.log(username)
   console.log(password)
@@ -26,7 +25,7 @@ const Tracker = () => {
   }
   async function add_subject(e){
     e.preventDefault(); 
-    const res=await axios.post("/api/add_subject",{
+    const res=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/add_subject`,{
       _id:_id,
       subject:new_subj
     })
@@ -39,7 +38,7 @@ const Tracker = () => {
     setnew_subj("")
   }
   async function add_present(subject){
-    const res=await axios.post("/api/add_present",{
+    const res=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/add_present`,{
       _id:_id,
       subject:subject
     })
@@ -52,7 +51,7 @@ const Tracker = () => {
   }
   
   async function add_absent(subject){
-  const res=await axios.post("/api/add_absent",{
+  const res=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/add_absent`,{
     _id:_id,
     subject:subject
   })
@@ -65,7 +64,7 @@ const Tracker = () => {
 }
 
 async function delete_subject(subject){
-const res=await axios.post("/api/delete_subject",{
+const res=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/delete_subject`,{
   _id:_id,
   subject:subject
 })
@@ -78,23 +77,23 @@ else{
 }
   return (
     <div>
-      <button onClick={()=>{fetch_attendance()}}>fetch attendance</button>
+      <button style={{border:"1px solid white"}} onClick={()=>{fetch_attendance()}}>fetch attendance</button>
 
       <form onSubmit={(e)=>{add_subject(e)}}>
         <textarea value={new_subj} onChange={(e)=>{
           setnew_subj(e.target.value)
         }}></textarea>
 
-        <button type={'submit'}>add subj</button>
+        <button style={{border:"1px solid white"}} type={'submit'}>add subj</button>
       </form>
       {fetched && (subject.map((subj,ind)=>(
-        <div key={ind}>
+        <div key={ind} style={{border:"1px solid white",marginBottom:"5px"}}>
           <h4>{subj.subject}</h4>
-          <h4>{subj.present}</h4>
-          <h4>{subj.totalClasses}</h4>
-          <button onClick={()=>{add_present(subj.subject)}}>add present</button>
-          <button onClick={()=>{add_absent(subj.subject)}}>add absent</button>
-          <button onClick={()=>{delete_subject(subj.subject)}}>delete</button>
+          <h4>present:  {subj.present}</h4>
+          <h4>classes:   {subj.totalClasses}</h4>
+          <button style={{border:"1px solid white"}} onClick={()=>{add_present(subj.subject)}}>add present</button>
+          <button style={{border:"1px solid white"}} onClick={()=>{add_absent(subj.subject)}}>add absent</button>
+          <button style={{border:"1px solid white"}} onClick={()=>{delete_subject(subj.subject)}}>delete</button>
         </div>
       )))}
     </div>
