@@ -52,7 +52,7 @@ const Login = () => {
         <input type="password" value={password} onChange={(e)=>{
           setpassword(e.target.value)
         }}></input>
-        <button type={'submit'}></button>
+        <button type={'submit'}>submit</button>
       </form>
     </div>
   )
