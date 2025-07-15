@@ -3,6 +3,7 @@ import './App.css'
 import Login from './components/Login'
 import Tracker from './components/Tracker'
 import { BrowserRouter,Router,Routes,RouterProvider, createBrowserRouter } from 'react-router-dom'
+import{Toaster} from "react-hot-toast"
 function App() {
   const router=createBrowserRouter([{
     path:"/",
@@ -14,8 +15,10 @@ function App() {
     <Tracker/>
   }])
   return (
+    <>
+    <Toaster position='top-center'></Toaster>
     <RouterProvider router={router}>
-    </RouterProvider>
+    </RouterProvider></>
   )
 }
 
